@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather Dashboard</title>
+    <link rel="stylesheet" href="./assets/css/style.css">
+</head>
+<body>
+    <header class="header">
+        <h1>Weather Dashboard</h1>
+    </header>
+
+    <div class="container">
+        <div class="search-box">
+            <h2>Search for a City:</h2>
+            <form id="form-search">
+                <label for="search-query">City:</label>
+                <input class="city-input" type="text" id="search-query" name="city" placeholder="San Diego">
+                <button type="search-history" class="search-btn">Search</button>
+            </form>
+        </div>
+
+        <div class="weather-info">
+            <h2>Current Weather</h2>
+            <p><strong>City:</strong> <span id="current-city"></span></p>
+            <p><strong>Date:</strong> <span id="current-date"></span></p>
+            <p><strong>Temperature:</strong> <span id="current-temperature"></span></p>
+            <p><strong>Wind Speed:</strong> <span id="current-wind-speed"></span></p>
+            <p><strong>Humidity:</strong> <span id="current-humidity"></span></p>
+        </div>
+
+        <div class="five-day-forecast">
+            <div class="day-forecast">
+                <h3>Day 1</h3>
+                <p><strong>Date:</strong> <span id="day1-date"></span></p>
+                <p><strong>Temperature:</strong> <span id="day1-temperature"></span></p>
+                <p><strong>Wind Speed:</strong> <span id="day1-wind-speed"></span></p>
+                <p><strong>Humidity:</strong> <span id="day1-humidity"></span></p>
+            </div>
+
+            <div class="day-forecast">
+                <h3>Day 2</h3>
+                <p><strong>Date:</strong> <span id="day2-date"></span></p>
+                <p><strong>Temperature:</strong> <span id="day2-temperature"></span></p>
+                <p><strong>Wind Speed:</strong> <span id="day2-wind-speed"></span></p>
+                <p><strong>Humidity:</strong> <span id="day2-humidity"></span></p>
+            </div>
+        </div>
+
+        <div class="search-history">
+            <h3>Search History</h3>
+            <ul id="city-history">
+                
+            </ul>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/dayjs@1.11.3/dayjs.min.js"></script>
+    <script src="./assets/js/script.js"></script>
+</body>
+</html>
