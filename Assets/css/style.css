@@ -1,0 +1,90 @@
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #15202B;
+    color: #FFFFFF;
+}
+
+header {
+    background-color: #1DA1F2;
+    color: #FFFFFF;
+    text-align: center;
+    padding: 1em;
+}
+
+/* Weather Section */
+#weather {
+    display: flex;
+    flex-direction: row;
+}
+
+aside {
+    flex: 1;
+    padding: 1em;
+    background-color: #192734;
+}
+
+main {
+    flex: 2;
+    padding: 1em;
+    background-color: #192734;
+}
+
+/* Search Section */
+#searchSection {
+    margin-bottom: 1em;
+}
+
+#search-form input {
+    width: 100%;
+    padding: 0.5em;
+    margin-bottom: 0.5em;
+    background-color: #253341;
+    border: none;
+    color: #FFFFFF;
+}
+
+#searchButton {
+    display: block;
+    width: 100%;
+    padding: 0.5em;
+    background-color: #1DA1F2;
+    color: #FFFFFF;
+    border: none;
+    cursor: pointer;
+}
+
+#searchButton:hover {
+    background-color: #0c84d2;
+}
+
+/* Main Content */
+#today, #forecast {
+    margin-bottom: 1em;
+    border-radius: 10px;
+    padding: 1em;
+    background-color: #253341;
+}
+
+#forecast div {
+    margin: 0.5em;
+    padding: 0.5em;
+    background-color: #192734;
+    border-radius: 5px;
+}
+
+h2, h3 {
+    margin: 0.5em 0;
+}
+
+/* Links */
+a {
+    color: #1DA1F2;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}

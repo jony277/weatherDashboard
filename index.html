@@ -1,63 +1,78 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Weather Dashboard</title>
-    <link rel="stylesheet" href="./Develop/css/style.css">
-</head>
-<body>
-    <header class="header">
-        <h1>Weather Dashboard</h1>
-    </header>
 
-    <div class="container">
-        <div class="search-box">
-            <h2>Search for a City:</h2>
-            <form id="form-search">
-                <label for="search-query">City:</label>
-                <input class="city-input" type="text" id="search-query" name="city" placeholder="San Diego">
-                <button type="search-history" class="search-btn">Search</button>
-            </form>
-        </div>
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="Assets/css/style.css" />
+        <title>Weather Dashboard</title>
+    </head>
 
-        <div class="weather-info">
-            <h2>Current Weather</h2>
-            <p><strong>City:</strong> <span id="current-city"></span></p>
-            <p><strong>Date:</strong> <span id="current-date"></span></p>
-            <p><strong>Temperature:</strong> <span id="current-temperature"></span></p>
-            <p><strong>Wind Speed:</strong> <span id="current-wind-speed"></span></p>
-            <p><strong>Humidity:</strong> <span id="current-humidity"></span></p>
-        </div>
-
-        <div class="five-day-forecast">
-            <div class="day-forecast">
-                <h3>Day 1</h3>
-                <p><strong>Date:</strong> <span id="day1-date"></span></p>
-                <p><strong>Temperature:</strong> <span id="day1-temperature"></span></p>
-                <p><strong>Wind Speed:</strong> <span id="day1-wind-speed"></span></p>
-                <p><strong>Humidity:</strong> <span id="day1-humidity"></span></p>
-            </div>
-
-            <div class="day-forecast">
-                <h3>Day 2</h3>
-                <p><strong>Date:</strong> <span id="day2-date"></span></p>
-                <p><strong>Temperature:</strong> <span id="day2-temperature"></span></p>
-                <p><strong>Wind Speed:</strong> <span id="day2-wind-speed"></span></p>
-                <p><strong>Humidity:</strong> <span id="day2-humidity"></span></p>
-            </div>
-        </div>
-
-        <div class="search-history">
-            <h3>Search History</h3>
-            <ul id="city-history">
-                
-            </ul>
-        </div>
-    </div>
-
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/dayjs@1.11.3/dayjs.min.js"></script>
-    <script src="./Develop/js/index.js"></script>
-</body>
+    <body>
+        <header>
+            <h1>Upcoming Forecast Dashboard</h1>
+        </header>
+        <div id="weather">
+            <aside>
+                <div id="searchSection">
+                    <h2>Search for a City:</h2>
+                    <form id="search-form">
+                        <label for="search-query"></label>
+                        <input type="text" id="search-query" name="q"><br>
+                        <button id="searchButton">Search</button>
+                    </form>
+                    <div id="search-list"></div>
+                </div>
+            </aside>
+            <main>
+                <div id="today">
+                    <h2 id="location">City</h2>
+                    <h3 id="tempature">Tempature:</h3>
+                    <h3 id="windSpeed">Wind Speeds:</h3>
+                    <h3 id="humidity">Humidity:</h3>
+                </div>
+                    <h2 id="5DayheadsUp">Next 5 Days</h2>
+                <div id="forecast">
+                    <div id="dayNx1">
+                        <h2 id="dateNx1"></h2>
+                        <h3 id="tempNx1">Temp:</h3>
+                        <h3 id="windNx1">Wind:</h3>
+                        <h3 id="humidNx1">Humidity:</h3>
+                    </div>
+                    <div id="dayNx2">
+                        <h2 id="dateNx2"></h2>
+                        <h3 id="tempNx2">Temp:</h3>
+                        <h3 id="windNx2">Wind:</h3>
+                        <h3 id="humidNx2">Humidity:</h3>
+                    </div>
+                    <div id="dayNx3">
+                        <h2 id="dateNx3"></h2>
+                        <h3 id="tempNx3">Temp:</h3>
+                        <h3 id="windNx3">Wind:</h3>
+                        <h3 id="humidNx3">Humidity:</h3>
+                    </div>
+                    <div id="dayNx4">
+                        <h2 id="dateNx4"></h2>
+                        <h3 id="tempNx4">Temp:</h3>
+                        <h3 id="windNx4">Wind:</h3>
+                        <h3 id="humidNx4">Humidity:</h3>
+                    </div>
+                    <div id="dayNx5">
+                        <h2 id="dateNx5"></h2>
+                        <h3 id="tempNx5">Temp:</h3>
+                        <h3 id="windNx5">Wind:</h3>
+                        <h3 id="humidNx5">Humidity:</h3>
+                    </div>
+                </div>
+            </main>
+        </div>        
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+        <script 
+        src="https://cdn.jsdelivr.net/npm/dayjs@1.11.3/dayjs.min.js"
+        integrity="sha256-iu/zLUB+QgISXBLCW/mcDi/rnf4m4uEDO0wauy76x7U="
+        crossorigin="anonymous"
+        ></script>
+        <script type="text/javascript" src="assets/js/index.js"></script>
+    </body>
 </html>
