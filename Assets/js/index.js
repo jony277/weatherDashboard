@@ -1,80 +1,101 @@
-var key="ec6c60a82ccc8663fc1ca5e83c4f5b39";
-var locations = [];
+var key = '64f2ee2a8261daa4d9f780f5b365f275';
+var city = "Denver"
 
-function getApi(requestUrl) {
-    fetch(requestUrl)
-      .then(function (response) {
-        return response.json();
-      })
-      .then(function (data) {
-        var geoLocationLat=data.city.coord.lat
-        var geoLocationLon=data.city.coord.lon
-        var requestWeatherUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${geoLocationLat}&lon=${geoLocationLon}&exclude=hourly,daily&units=imperial&appid=${key}`;
-        getWeatherAPI(requestWeatherUrl)
-      })
-};
+//Grabs the current time and date
+var date = moment().format('dddd, MMMM Do YYYY');
+var dateTime = moment().format('YYYY-MM-DD HH:MM:SS')
 
-function getWeatherAPI (requestWeatherUrl){
+var cityHist = [];
+//Will save the text value of the search and save it to an array and storage
+$('.search').on("click", function (event) {
+	event.preventDefault();
+	city = $(this).parent('.btnPar').siblings('.textVal').val().trim();
+	if (city === "") {
+		return;
+	};
+	cityHist.push(city);
 
-  var days=[$("#today"),$("#dayNx1"),$("#dayNx2"),$("#dayNx3"),$("#dayNx4"),$("#dayNx5")]
-  var location=[$("#location"),$("#dateNx1"),$("#dateNx2"),$("#dateNx3"),$("#dateNx4"),$("#dateNx5")]
-  var tempature=[$("#tempature"),$("#tempNx1"),$("#tempNx2"),$("#tempNx3"),$("#tempNx4"),$("#tempNx5")];
-  var windSpeed=[$("#windSpeed"),$("#windNx1"),$("#windNx2"),$("#windNx3"),$("#windNx4"),$("#windNx5")];
-  var humidity=[$("#humidity"),$("#humidNx1"),$("#humidNx2"),$("#humidNx3"),$("#humidNx4"),$("#humidNx5")];
-
-  var currentDate = dayjs().format('DD/MM/YYYY')
-
-
-    fetch(requestWeatherUrl)
-        .then(function(response){
-          return response.json();
-        })
-        .then(function(data){
-
-            function getWeatherIcon(x) {
-                var todayIcon=data.list[x].weather[0].icon;
-                var img=$('<img>',{src:`https://openweathermap.org/img/wn/${todayIcon}@2x.png`})
-                return img
-            }
-
-            days[0].append(getWeatherIcon(0));
-            location[0].text(data.city.name+" - "+currentDate);
-            tempature[0].text("Temp: "+data.list[0].main.temp+" F");
-            windSpeed[0].text("Wind: "+data.list[0].wind.speed+" mph");
-            humidity[0].text("Humidity: "+data.list[0].main.humidity+"%");
-
-            for (var i = 1, x = 6; i<6; i++, x=x+8){
-                days[i].append(getWeatherIcon(x));
-                location[i].text(nextDay = dayjs().add(1,'d'));
-                tempature[i].text("Temp: "+data.list[x].main.temp+" F");
-                windSpeed[i].text("Wind: "+data.list[x].wind.speed+" mph");
-                humidity[i].text("Humidity: "+data.list[x].main.humidity+"%");
-            }
-        })
-};
-
-$("#searchButton").on('click', function (event){
-    event.preventDefault();
-    var cityName = $('#search-query').val()
-    locations.push(cityName)
-    storeLocations()
-    $('#search-list').text(locations)
-    $('#search-query').val("")
-    var requestGeocodeUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${cityName}&appid=${key}`;
-    getApi(requestGeocodeUrl);
+	localStorage.setItem('city', JSON.stringify(cityHist));
+	fiveForecastEl.empty();
+	getHistory();
+	getWeatherToday();
 });
 
-function init() {
-  var storedLocations = JSON.parse(localStorage.getItem("locations"));
+//Will create buttons based on search history 
+var contHistEl = $('.cityHist');
+function getHistory() {
+	contHistEl.empty();
 
-  if (storedLocations !== null) {
-    locations = storedLocations;
-    $('#search-list').text(locations)
-  }
-}
+	for (let i = 0; i < cityHist.length; i++) {
 
-function storeLocations() {
-  localStorage.setItem("locations", JSON.stringify(locations));
-}
+		var rowEl = $('<row>');
+		var btnEl = $('<button>').text(`${cityHist[i]}`)
 
-init()
+		rowEl.addClass('row histBtnRow');
+		btnEl.addClass('btn btn-outline-secondary histBtn');
+		btnEl.attr('type', 'button');
+
+		contHistEl.prepend(rowEl);
+		rowEl.append(btnEl);
+	} if (!city) {
+		return;
+	}
+	//Allows the buttons to start a search as well
+	$('.histBtn').on("click", function (event) {
+		event.preventDefault();
+		city = $(this).text();
+		fiveForecastEl.empty();
+		getWeatherToday();
+	});
+};
+
+//Grab the main 'Today' card body.
+var cardTodayBody = $('.cardBodyToday')
+//Applies the weather data to the today card and then launches the five day forecast
+function getWeatherToday() {
+	var getUrlCurrent = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=imperial&appid=${key}`;
+
+	$(cardTodayBody).empty();
+
+	$.ajax({
+		url: getUrlCurrent,
+		method: 'GET',
+	}).then(function (response) {
+		$('.cardTodayCityName').text(response.name);
+		$('.cardTodayDate').text(date);
+		//Icons
+		$('.icons').attr('src', `https://openweathermap.org/img/wn/${response.weather[0].icon}@2x.png`);
+		// Temperature
+		var pEl = $('<p>').text(`Temperature: ${response.main.temp} °F`);
+		cardTodayBody.append(pEl);
+		//Humidity
+		var pElHumid = $('<p>').text(`Humidity: ${response.main.humidity} %`);
+		cardTodayBody.append(pElHumid);
+		//Wind Speed
+		var pElWind = $('<p>').text(`Wind Speed: ${response.wind.speed} MPH`);
+		cardTodayBody.append(pElWind);
+		//Set the lat and long from the searched city
+		var cityLon = response.coord.lon;
+		// console.log(cityLon);
+		var cityLat = response.coord.lat;
+		// console.log(cityLat);
+
+
+	});
+};
+
+
+
+//Allows for the example data to load for Denver
+function initLoad() {
+
+	var cityHistStore = JSON.parse(localStorage.getItem('city'));
+
+	if (cityHistStore !== null) {
+		cityHist = cityHistStore
+	}
+	getHistory();
+	getWeatherToday();
+};
+
+initLoad();
