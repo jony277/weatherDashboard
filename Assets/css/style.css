@@ -1,90 +1,82 @@
 /* General Styles */
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f4;
     margin: 0;
     padding: 0;
-    background-color: #15202B;
-    color: #FFFFFF;
 }
 
-header {
-    background-color: #1DA1F2;
-    color: #FFFFFF;
+h1 {
     text-align: center;
-    padding: 1em;
+    background-color: #4CAF50;
+    color: white;
+    padding: 1rem;
+    margin: 0;
 }
 
-/* Weather Section */
-#weather {
-    display: flex;
-    flex-direction: row;
+/* Container */
+.mainCon {
+    max-width: 1200px;
+    margin: auto;
 }
 
-aside {
-    flex: 1;
-    padding: 1em;
-    background-color: #192734;
+/* Column One */
+.colOne {
+    background-color: #333;
+    color: #fff;
+    padding: 1rem;
 }
 
-main {
-    flex: 2;
-    padding: 1em;
-    background-color: #192734;
+.colOne label, .colOne input, .colOne button {
+    margin-bottom: 1rem;
 }
 
-/* Search Section */
-#searchSection {
-    margin-bottom: 1em;
+/* Search button */
+.btn-primary {
+    background-color: #4CAF50;
 }
 
-#search-form input {
-    width: 100%;
-    padding: 0.5em;
-    margin-bottom: 0.5em;
-    background-color: #253341;
-    border: none;
-    color: #FFFFFF;
+.btn-primary:hover {
+    background-color: #45a049;
 }
 
-#searchButton {
-    display: block;
-    width: 100%;
-    padding: 0.5em;
-    background-color: #1DA1F2;
-    color: #FFFFFF;
-    border: none;
-    cursor: pointer;
+/* Column Two */
+.colTwo {
+    padding: 1rem;
 }
 
-#searchButton:hover {
-    background-color: #0c84d2;
-}
-
-/* Main Content */
-#today, #forecast {
-    margin-bottom: 1em;
+/* Cards */
+.card {
     border-radius: 10px;
-    padding: 1em;
-    background-color: #253341;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 2rem;
 }
 
-#forecast div {
-    margin: 0.5em;
-    padding: 0.5em;
-    background-color: #192734;
-    border-radius: 5px;
+.card-header {
+    background-color: #4CAF50;
+    color: white;
 }
 
-h2, h3 {
-    margin: 0.5em 0;
+.card-body {
+    background-color: #fff;
+    color: #333;
 }
 
-/* Links */
-a {
-    color: #1DA1F2;
-    text-decoration: none;
+/* Icons */
+.icons {
+    width: 50px;
+    height: 50px;
 }
 
-a:hover {
-    text-decoration: underline;
+/* Five Day Forecast */
+.fiveForecast {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+@media screen and (max-width: 768px) {
+    .fiveForecast {
+        flex-direction: column;
+    }
 }
